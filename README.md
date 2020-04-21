@@ -10,9 +10,9 @@ Setup to host Flask Sample app on AWS beanstalk
 $ git clone <url>
 ```
 Setup python Virtual environment 
-  ```
-  NOTE: (Use pip3 and python3 if your default configuration is not python3.6 or above)
-```
+ 
+> Note: Use pip3 and python3 if your default configuration is not python3.6 or above
+
  Virtual environments are independent groups of Python libraries, one for each project.Python 3 comes bundled with the <venv> module to create virtual environments.
  Create Python environment with name `venv`.Because .gitignore specifies `venv`
   
@@ -79,7 +79,7 @@ How to deploy updates in application
 $ eb deploy AWSFlaskSample
 ```
 
-NOTE:  if git is installed, EB CLI uses the git archive command to create a .zip file from the contents of the most recent git commit command.
+> Note:  if git is installed, EB CLI uses the git archive command to create a .zip file from the contents of the most recent git commit command.
 However, when .ebignore is present in your project directory, the EB CLI doesn't use git commands and semantics to create your source bundle. 
 This means that EB CLI ignores files specified in .ebignore, and includes all other files. In particular, it includes uncommitted source files.
 
