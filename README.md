@@ -47,7 +47,12 @@ For the first time user of AWS, create Your First IAM Admin User and Group for E
 ```
 $ aws configure
 ```
+Alternative,Go to  ~/.aws/config file to configure your credentials.Deactivate your environment 
+```
+$ cd .aws
+$ sudo vim credentials
 
+```
 Install the `awsebcli` library to interact and manage your EB service on AWS
 ```
 $ pip install awsebcli
@@ -95,6 +100,7 @@ This means that EB CLI ignores files specified in .ebignore, and includes all ot
 References
 1. http://amunategui.github.io/aws-beanstalk/
 2. https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
+3. https://medium.com/@fullsour/how-to-switch-user-on-the-aws-cli-77c2b314e12d
 
 
 
