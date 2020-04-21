@@ -1,8 +1,8 @@
 Must Requirements for hosting flask application using AWS beanstalk
 ```
-- Main file name application.py
-- Name inside application.py should be application = Flask(name)
-- Requirement file is important for AWS beanstalk to know which dependencies need to be installed while deployment
+1. Main file name application.py
+2. Name inside application.py should be application = Flask(name)
+3. Requirement file is important for AWS beanstalk to know which dependencies need to be installed while deployment
 ```
 Setup to host Flask Sample app on AWS beanstalk 
 
@@ -82,6 +82,10 @@ $ eb deploy AWSFlaskSample
 > Note:  if git is installed, EB CLI uses the git archive command to create a .zip file from the contents of the most recent git commit command.
 However, when .ebignore is present in your project directory, the EB CLI doesn't use git commands and semantics to create your source bundle. 
 This means that EB CLI ignores files specified in .ebignore, and includes all other files. In particular, it includes uncommitted source files.
+
+References
+http://amunategui.github.io/aws-beanstalk/
+https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
 
 
 
