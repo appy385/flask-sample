@@ -1,8 +1,8 @@
 Must Requirements for hosting flask application using AWS beanstalk
 ```
-1. Main file name application.py
+1. Main python file name should be application.py
 2. Name inside application.py should be application = Flask(name)
-3. Requirement file is important for AWS beanstalk to know which dependencies need to be installed while deployment
+3. Requirements.txt file is important for AWS beanstalk to know which dependencies need to be installed while deployment
 ```
 Setup to host Flask Sample app on AWS beanstalk 
 
@@ -14,7 +14,7 @@ Setup python Virtual environment
 > Note: Use pip3 and python3 if your default configuration is not python3.6 or above
 
  Virtual environments are independent groups of Python libraries, one for each project.Python 3 comes bundled with the <venv> module to create virtual environments.
- Create Python environment with name `venv`.Because .gitignore specifies `venv`
+Create Python environment with name `venv`. Because .gitignore specifies `venv`
   
   ```
 $ python -m venv venv
@@ -42,13 +42,13 @@ In my setup awscli is installed inside virtual environment not globally in syste
 $ pip install awscli
 
 ```
-For the first time user of AWS, to create Your First IAM Admin User and Group for Elastic Beanstalk. Fill  `Access type: Programmatic access` and assign it the `policy name: AdministrationAccess` .Download the credetials.csv and use this command to configure your credentials.
+For the first time user of AWS, create Your First IAM Admin User and Group for Elastic Beanstalk. Fill  `Access type: Programmatic access` and assign it the `policy name: AdministrationAccess`.Download the credetials.csv and use this command to configure your credentials.
 
 ```
 $ aws configure
 ```
 
-Install the `awsebcli` library to interact and manage our EB service on AWS
+Install the `awsebcli` library to interact and manage your EB service on AWS
 ```
 $ pip install awsebcli
 
@@ -57,7 +57,7 @@ Initialize the Elastic Bean interface
 ```
  Note: 
  1. Select python 3.6 not 3.7 . Initializing of EC2 instance fails on 3.7 Amazon linux system
- 2. Create a new KeyPair or select an existing one according to the region you have selected.To create new keypair go to AWS EC2.
+ 2. Create a new KeyPair or select an existing one according to the region you have selected.Go to AWS EC2 to create new key-pair
  3. Keypair is required to link your AWS beanstalk environment with ssh client.
 ```
 Before running this command make sure this prerequisite is completed:
