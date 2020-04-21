@@ -30,6 +30,12 @@ Now, install dependencies from requirement file ` requirements.txt`
 $ pip install -r requirements.txt
 ```
 
+Your Flask setup is ready.To check your flask application is running successfully. Run your flask application in local environment. Make sure your python virtual environment is activate.
+```
+$ export FLASK_APP=application.py
+$ flask run
+```
+
 In my setup awscli is installed inside virtual environment not globally in system
 
 ```
