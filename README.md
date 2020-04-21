@@ -84,8 +84,8 @@ However, when .ebignore is present in your project directory, the EB CLI doesn't
 This means that EB CLI ignores files specified in .ebignore, and includes all other files. In particular, it includes uncommitted source files.
 
 References
-http://amunategui.github.io/aws-beanstalk/
-https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
+1. http://amunategui.github.io/aws-beanstalk/
+2. https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
 
 
 
