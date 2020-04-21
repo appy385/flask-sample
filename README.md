@@ -52,7 +52,7 @@ Initialize the Elastic Bean interface
  Note: 
  1. Select python 3.6 not 3.7 . Initializing of EC2 instance fails on 3.7 Amazon linux system
  2. Create a new KeyPair or select an existing one according to the region you have selected.To create new keypair go to AWS EC2.
- 3. Keypair is required to link your environment with ssh.
+ 3. Keypair is required to link your AWS beanstalk environment with ssh client.
 ```
 Before running this command make sure this prerequisite is completed:
 ```
