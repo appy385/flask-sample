@@ -97,6 +97,11 @@ $ eb deploy AWSFlaskSample
 However, when .ebignore is present in your project directory, the EB CLI doesn't use git commands and semantics to create your source bundle. 
 This means that EB CLI ignores files specified in .ebignore, and includes all other files. In particular, it includes uncommitted source files.
 
+
+To setup continuous seployment pipeline using AWS beanstalk and codepipeline.Follow the link 
+https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/
+
+
 References
 1. http://amunategui.github.io/aws-beanstalk/
 2. https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
