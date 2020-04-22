@@ -101,6 +101,12 @@ This means that EB CLI ignores files specified in .ebignore, and includes all ot
 To setup continuous deployment pipeline using AWS beanstalk and code pipeline. Follow the link:-
 https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/
 
+To create and sign X509 certificate for your application with OpenSSL in order to make HTTPS request with Beanstalk
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html
+
+After creating self-signed certificate, to upload certificate to IAM follow this link:-
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl-upload.html
+
 
 References
 1. http://amunategui.github.io/aws-beanstalk/
