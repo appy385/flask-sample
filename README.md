@@ -98,7 +98,7 @@ However, when .ebignore is present in your project directory, the EB CLI doesn't
 This means that EB CLI ignores files specified in .ebignore, and includes all other files. In particular, it includes uncommitted source files.
 
 
-To setup continuous seployment pipeline using AWS beanstalk and codepipeline.Follow the link 
+To setup continuous deployment pipeline using AWS beanstalk and code pipeline. Follow the link:-
 https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/
 
 
