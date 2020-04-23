@@ -137,7 +137,40 @@ Open `Route53` from AWS services and create a hosted zone.
 - Go to your freenom account then click on Navigation Tab **services**  > **mydomains** .Click on **Manage domain** and from **management tools** drop-down > click on **nameservers** and paste the 4 AWS name servers on **custom nameservers** option.
 - Visit this site [www.dnschecker.org/#NS] and enter your domain if everything is right then you should see your AWS name servers within 5–10min.
 
-### Get SSL certificate
+### Create SSL certificate with ACM
+
+You can get your SSL certificate for free at AWS services. Open `Certificate Manager` from AWS services and select the same region you have chosen for your EB environmemnt.
+- Click on **Request a certificate** button and go with the default option **public certificate**.
+- Add your domain name and click **Next**.
+- Choose **DNS validation** to validate that you are the owner of the domain.
+- Adding **Tag** not required, click on  **Review** and then click on **Confirm Request**.
+
+Request for validation will be displayed as `Pending`.Certificate will be issued only after verification via DNS is done successfully.
+
+- To verify via DNS, you need to add the CNAME record in your `Route53` under your hosted zone with your domain name.
+- This step can be completed from `Certificate Manager` itself. Simply click on the **create record in Route 53** button to the CNAME record.
+
+If you have done everything right then within 5–10 mins the status of certificate will be changed to **issued**.
+
+### Apply our newly created SSL Certificate to Application Load Balancer.
+
+In order to make HTTPS request we need to add this SSL certificate to the load balancer.
+
+- Navigate to the Configuration Tab of your Elastic Beanstalk App. Click on **Edit** button of Load Balancer.
+- Add listener to the load balancer with following details and assign the newly created SSL certificate.
+```
+Listener Port: 443
+Listener Protocol: HTTPS
+Instance Port: 80
+Instance Protocol: HTTP
+```
+**Apply** your changes. Once completeled, navigate to https://yourdomain and you should see your site served through HTTPS.
+
+
+
+
+
+
 
 
 
