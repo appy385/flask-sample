@@ -152,7 +152,7 @@ Request for validation will be displayed as `Pending`.Certificate will be issued
 
 If you have done everything right then within 5–10 mins the status of certificate will be changed to **issued**.
 
-### Apply our newly created SSL Certificate to Application Load Balancer.
+### Apply the newly created SSL Certificate to Application Load Balancer.
 
 In order to make HTTPS request we need to add this SSL certificate to the load balancer.
 
@@ -164,7 +164,7 @@ Listener Protocol: HTTPS
 Instance Port: 80
 Instance Protocol: HTTP
 ```
-**Apply** your changes. Once completeled, navigate to https://yourdomain and you should see your site served through HTTPS.
+**Apply** these changes. Once completeled, navigate to https://yourdomain and you should see your site served through HTTPS.
 
 
 
