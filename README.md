@@ -7,7 +7,7 @@ Must Requirements for hosting flask application using AWS beanstalk
 Setup to host Flask Sample app on AWS beanstalk 
 
 ```
-$ git clone <url>
+$ git clone https://github.com/appy385/flask-sample.git
 ```
 Setup python Virtual environment 
  
@@ -61,9 +61,11 @@ $ pip install awsebcli
 Initialize the Elastic Bean interface
 ```
  Note: 
- 1. Select python 3.6 not 3.7 . Initializing of EC2 instance fails on 3.7 Amazon linux system
+ 1. Select python 3.6 not 3.7 . Initializing EC2 instance fails on 3.7 Amazon linux system
  2. Create a new KeyPair or select an existing one according to the region you have selected.Go to AWS EC2 to create new key-pair
- 3. Keypair is required to link your AWS beanstalk environment with ssh client.
+ 3. Key-pair is required to link your AWS beanstalk environment with ssh client
+ 4. key-pair should belong to the same region you have chosen for AWS beanstalk environment 
+ 5. Download the key-pair .pem file.Keep it safe.
 ```
 Before running this command make sure this prerequisite is completed:
 ```
