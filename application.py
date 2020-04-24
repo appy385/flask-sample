@@ -9,8 +9,23 @@ CORS(application)
 
 
 @application.route("/")
-def hello():
-    return "hello world!!"
+def bookList():
+    return { "status": { "code": 200},
+            "response": {
+                    "bookslist": [ {"name":"Wings of Fire",
+                    "author":"A P J Abdul Kalam, Arun Tiwari"
+                    },
+                    {"name":"Harry Potter and the Half-Blood Prince",
+                    "author":"J K Rowling"
+                    },
+                    {"name":"Long Walk to freedom",
+                    "author":"Nelson Mandela"
+                    },
+                    {"name":"Harry Potter and the Half-Blood Prince",
+                    "author":"J K Rowling"
+                    } ]
+                }
+            }
 
 
 
