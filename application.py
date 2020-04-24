@@ -1,19 +1,17 @@
-import os
 from flask import Flask
-from config import Config
+# from config import Config
 from flask_sqlalchemy import SQLAlchemy
 
 application = Flask(__name__)
 CORS(application)
-application.config.from_object(Config)
+# application.config.from_object(Config)
 db = SQLAlchemy(application)
 
 
 
 @application.route("/")
 def BooksList():
-    return { "status": { "code": 200},
-            "response": {
+    return  {
                     "bookslist": [ {"name":"Wings of Fire",
                     "author":"A P J Abdul Kalam, Arun Tiwari"
                     },
@@ -27,7 +25,7 @@ def BooksList():
                     "author":"J K Rowling"
                     } ]
                 }
-            }
+
 
 
 if __name__ == '__main__':
