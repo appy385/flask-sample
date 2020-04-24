@@ -11,7 +11,7 @@ db = SQLAlchemy(application)
 
 
 @application.route("/")
-def hello():
+def BooksList():
     return { "status": { "code": 200},
             "response": {
                     "bookslist": [ {"name":"Wings of Fire",
