@@ -1,11 +1,13 @@
 from flask import Flask
-#from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+
 from flask_cors import CORS, cross_origin
 
 application = Flask(__name__)
+application.debug=True
 CORS(application)
-#db = SQLAlchemy(application)
-
+application.config.from_object('config')
+db = SQLAlchemy(application)
 
 
 @application.route("/")
