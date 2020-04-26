@@ -28,6 +28,10 @@ def bookList():
                     } ]
                 }
             }
+@application.route("/<genre>")
+def genre(genre):
+    return "hello" + genre
+
 
 
 
