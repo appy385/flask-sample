@@ -1,13 +1,14 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
+from application import *
+from application.models import Book
 from flask_cors import CORS, cross_origin
+from  sqlalchemy.sql.expression import func
 
-application = Flask(__name__)
+# Elastic Beanstalk initalization
+# application = Flask(__name__)
 application.debug=True
 CORS(application)
-application.config.from_object('config')
-db = SQLAlchemy(application)
+
 
 
 @application.route("/")
@@ -30,7 +31,12 @@ def bookList():
             }
 @application.route("/<genre>")
 def genre(genre):
-    return "hello" + genre
+    books=db.session.query(Book).limit(10)
+    for b in books:
+        print(b.average_rating)
+    # books= Book.query.order_by(func.rand()).limit(1)
+    # print()
+    return "hello world"
 
 
 
