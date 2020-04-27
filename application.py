@@ -31,9 +31,9 @@ def bookList():
             }
 @application.route("/<genre>")
 def genre(genre):
-    books=db.session.query(Book).limit(10)
-    for b in books:
-        print(b.average_rating)
+    # books=db.session.query(Book).limit(10)
+    # for b in books:
+    #     print(b.average_rating)
     # books= Book.query.order_by(func.rand()).limit(1)
     # print()
     return "hello world"
