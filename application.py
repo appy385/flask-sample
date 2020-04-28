@@ -24,9 +24,7 @@ def bookList():
                     {"name":"Long Walk to freedom",
                     "author":"Nelson Mandela"
                     },
-                    {"name":"Harry Potter and the Half-Blood Prince",
-                    "author":"J K Rowling"
-                    } ]
+                    ]
                 }
             }
 @application.route("/<genre>")
