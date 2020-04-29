@@ -148,7 +148,7 @@ Open `Route53` from AWS services and create a hosted zone.
 - Go to your freenom account then click on Navigation Tab **services**  > **mydomains** .Click on **Manage domain** and from **management tools** drop-down > click on **nameservers** and paste the 4 AWS name servers on **custom nameservers** option.
 - Visit this site [www.dnschecker.org/#NS] and enter your domain if everything is right then you should see your AWS name servers within 5–10min.
 
-### Create SSL certificate with ACM
+### Create SSL certificate with AWS Credential Manager
 
 You can get your SSL certificate for free at AWS services. Open `Certificate Manager` from AWS services and select the same region you have chosen for your EB environmemnt.
 - Click on **Request a certificate** button and go with the default option **public certificate**.
