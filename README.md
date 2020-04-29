@@ -67,11 +67,11 @@ $ sudo vim credentials
 ```
 
 
-Initialize the Elastic Beanstalk interface
+#### Initialize the Elastic Beanstalk interface
 
 Create a new KeyPair if you don't have one. Key-pair is required to setup your AWS beanstalk environment with ssh client.
  
- #### Steps to create Key-pair
+ ##### Steps to create Key-pair
  
   > Note: key-pair should belong to the same region as your AWS Elastick beanstalk environment. 
   
