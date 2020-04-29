@@ -46,12 +46,14 @@ $ flask run
 
 ## Deploy Flask application with AWS Elastick Beanstalk 
 
-In my setup process, `awscli` and `awsebcli` are installed inside Python Virtual Environment not globally
+In my setup process, `awscli` and `awsebcli` are already installed inside Python Virtual Environment `venv` using `requiremnets.txt` file. For sake of compeletion these are the steps:-
 
+Install `awscli` and  `awsebcli` library to interact and manage your EB service on AWS
 ```
 $ pip install awscli
-
+$ pip install awsebcli
 ```
+
 For the first time user of AWS, create Your First IAM Admin User and Group to use AWS services. Fill  `Access type: Programmatic access` and assign it the `policy name: AdministrationAccess`.Download the credetials.csv and use the command below to configure your credentials.
 
 ```
@@ -63,22 +65,25 @@ $ cd .aws
 $ sudo vim credentials
 
 ```
-Install the `awsebcli` library to interact and manage your EB service on AWS
-```
-$ pip install awsebcli
 
-```
-Initialize the Elastic Bean interface
 
-> Note: 
- >1. Select python 3.6 not 3.7 . Initializing EC2 instance fails on 3.7 Amazon linux system.
- >2. Create a new KeyPair or select an existing one according to the region you have selected in eb initialisation.
- >3. Go to AWS EC2 to create new key-pair.
- >4. Key-pair is required to link your AWS beanstalk environment with ssh client.
- >5. key-pair should belong to the same region you have chosen for AWS beanstalk environment. 
- >6. Download the <key-pair>.pem file. Keep it safe.
+Initialize the Elastic Beanstalk interface
+
+> Note:  Create a new KeyPair if you don't have one. Key-pair is required to setup your AWS beanstalk environment with ssh client.
  
-Before running this command make sure the above prerequisites is completed:
+ #### Steps to create Key-pair
+ 
+ Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/]. Select the region in the navigation pane, choose **Key Pairs**. Choose **Create key pair**. Download the .pem file. Keep it safe. This file contains your private-key.
+
+> Note: key-pair should belong to the same region as your AWS Elastick beanstalk environment. 
+
+
+ 
+> Note:
+> 1. Before running this command make sure that you have **key-pair** ready if you want to setup SSH client for your instance 
+> 2. Select python 3.6 not 3.7 . Initializing EC2 instance fails on python 3.7 Amazon linux system.
+
+Now, Initialize the Elastic Beanstalk interface
 ```
 $ eb init -i
 ```
