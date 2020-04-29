@@ -4,7 +4,7 @@
 Must Requirements for hosting flask application using AWS beanstalk
 ```
 1. Main python file name should be application.py
-2. Name inside application.py should be application = Flask(name)
+2. The application object that Flask uses should be named application and not app(e.g application = Flask(name))
 3. Requirements.txt file is important for AWS beanstalk to know which dependencies need to be installed while deployment
 ```
 
@@ -75,11 +75,16 @@ Create a new KeyPair if you don't have one. Key-pair is required to setup your A
  
   > Note: key-pair should belong to the same region as your AWS Elastick beanstalk environment. 
   
- Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/]. Select the region in the navigation pane, choose **Key Pairs**.Choose **Create key pair**. Download the .pem file. Keep it safe. This file contains your private-key.
-
+Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/]. Select the region in the navigation pane, choose **Key Pairs**.Choose **Create key pair**. Download the .pem file. Keep it safe. This file contains your private-key.
  
+Change the persmission of the .pem file.Command to ensure that you've changed the permissions on your key pair file so that only you can view it.
+
+```
+  chmod 400 <my-key-pair>.pem
+```
+
 > Note:
-> 1. Before running this command make sure that you have **key-pair** ready if you want to setup SSH client for your instance 
+> 1. Before running the command make sure that you have **key-pair** ready if you want to setup SSH client for your instance 
 > 2. Select python 3.6 not 3.7 . Initializing EC2 instance fails on python 3.7 Amazon linux system.
 
 Now, Initialize the Elastic Beanstalk interface
