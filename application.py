@@ -1,14 +1,22 @@
-from flask import Flask
+from flask import Flask, request
 from application import *
 from application.models import Book
 from flask_cors import CORS, cross_origin
 from  sqlalchemy.sql.expression import func
-
+from flask_mail import Mail, Message
 # Elastic Beanstalk initalization
-# application = Flask(__name__)
+#application = Flask(__name__)
 application.debug=True
 CORS(application)
+mail = Mail()
 
+application.config['MAIL_SERVER']='smtp.gmail.com'
+application.config['MAIL_PORT'] = 465
+application.config['MAIL_USERNAME'] = 'contactbookaholics@gmail.com'
+application.config['MAIL_PASSWORD'] = 'bookaholics@123'
+application.config['MAIL_USE_TLS'] = False
+application.config['MAIL_USE_SSL'] = True
+mail.init_app(application)
 
 
 @application.route("/")
@@ -42,6 +50,22 @@ def genre(genre):
     return booksDict
 
 
+@application.route('/contact',methods = ['POST'])
+def contact():
+        print(request);
+        send_message(request.json)
+        return {
+            "status": {"code": 200}
+        }
+
+def send_message(message):
+    print(message['email'])
+    msg = Message(subject="feedback for bookaholics", sender='contactbookaholics@gmail.com', recipients=['contactbookaholics@gmail.com'])
+    msg.body = """
+          From: %s <%s>
+          %s
+          """ % (message['name'], message['email'], message['message'])
+    mail.send(msg)
 
 
 if __name__ == '__main__':
