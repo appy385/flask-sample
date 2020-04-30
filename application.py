@@ -1,6 +1,6 @@
 from flask import Flask, request
 from application import *
-from application.models import Book
+from application.models import Books, BookTags
 from flask_cors import CORS, cross_origin
 from  sqlalchemy.sql.expression import func
 from flask_mail import Mail, Message
@@ -35,14 +35,24 @@ def bookList():
                     ]
                 }
             }
+
 @application.route("/<genre>")
 def genre(genre):
-    books= Book.query.filter_by(genre=genre).order_by(func.rand()).limit(10).all()
+    book_tag = db.session.query(BookTags).filter_by(genre=genre).subquery()
+    result = db.session.query(Books,book_tag.c.genre).join(book_tag,Books.goodreads_book_id == book_tag.c.goodreads_book_id).order_by(func.rand()).limit(10).all()
+    
     booksList=[]
 
-    for b in books:
-        book = {"book_id": b.book_id, "goodreads_book_id": b.goodreads_book_id, "authors": b.authors, "isbn": b.isbn, "title": b.title,
-        "average_rating": b.average_rating, "image_url": b.image_url, "genre": b.genre }
+    for b in result:
+        book={}
+        book['genre'] =  b.genre
+        book['book_id'] = b[0].book_id
+        book['goodreads_book_id'] = b[0].goodreads_book_id
+        book['authors'] = b[0].authors
+        book['isbn'] = b[0].isbn
+        book['title'] = b[0].title
+        book['average_rating'] = b[0].average_rating
+        book['image_url'] = b[0].image_url
         booksList.append(book)
 
     booksDict={ "bookslist": booksList}
