@@ -1,6 +1,6 @@
 from application import db
 
-class Book(db.Model):
+class Books(db.Model):
     book_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     goodreads_book_id =  db.Column(db.Integer, unique = True)
     authors = db.Column(db.String(255), nullable = False)
@@ -8,8 +8,16 @@ class Book(db.Model):
     title = db.Column(db.String(255), nullable = False)
     average_rating =  db.Column(db.Float, nullable = False)
     image_url = db.Column(db.String(255), nullable = False)
-    genre = db.Column(db.String(50), nullable = False)
-
 
     def __repr__(self):
         return '<Book{}>'.format(self.title)
+
+
+class BookTags(db.Model):
+    book_tag_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    goodreads_book_id =  db.Column(db.Integer, db.ForeignKey('books.goodreads_book_id'), nullable = False)
+    genre = db.Column(db.String(100), nullable = False)
+
+
+    def __repr__(self):
+        return '<BookTags{}>'.format(self.goodreads_book_id)
