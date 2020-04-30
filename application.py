@@ -1,12 +1,13 @@
 from flask import Flask, request
-from application import *
-from application.models import Books, BookTags
+from models import Books, BookTags
 from flask_cors import CORS, cross_origin
-from  sqlalchemy.sql.expression import func
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import func
 from flask_mail import Mail, Message
-# Elastic Beanstalk initalization
-#application = Flask(__name__)
-application.debug=True
+
+application = Flask(__name__)
+application.config.from_object('config')
+db = SQLAlchemy(application)
 CORS(application)
 mail = Mail()
 
@@ -40,7 +41,7 @@ def bookList():
 def genre(genre):
     book_tag = db.session.query(BookTags).filter_by(genre=genre).subquery()
     result = db.session.query(Books,book_tag.c.genre).join(book_tag,Books.goodreads_book_id == book_tag.c.goodreads_book_id).order_by(func.rand()).limit(10).all()
-    
+
     booksList=[]
 
     for b in result:

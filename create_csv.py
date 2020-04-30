@@ -24,7 +24,6 @@ poetry=df_tag[df_tag['tag_name'].str.match(re_poet)]
 
 
 
-
 scifi = pd.merge(left=df_btag, right=scifi)
 horor = pd.merge(left=df_btag, right=horor)
 comedy = pd.merge(left=df_btag, right=comedy)
@@ -34,6 +33,7 @@ adventure = pd.merge(left=df_btag, right=adventure)
 comics = pd.merge(left=df_btag, right=comics)
 poetry = pd.merge(left=df_btag, right=poetry)
 
+
 scifi = pd.merge(left=df_b, right=scifi)
 horor = pd.merge(left=df_b, right=horor)
 comedy = pd.merge(left=df_b, right=comedy)
@@ -42,6 +42,8 @@ romance = pd.merge(left=df_b, right=romance)
 adventure = pd.merge(left=df_b, right=adventure)
 comics = pd.merge(left=df_b, right=comics)
 poetry = pd.merge(left=df_b, right=poetry)
+
+
 
 scifi.drop_duplicates(subset='goodreads_book_id', keep="first", inplace=True)
 horor.drop_duplicates(subset='goodreads_book_id', keep="first", inplace=True)
@@ -63,7 +65,6 @@ comics.dropna(subset=['isbn','original_title'], inplace=True)
 poetry.dropna(subset=['isbn','original_title'], inplace=True)
 
 
-
 scifi=scifi[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
 horor=horor[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
 comedy=comedy[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
@@ -71,7 +72,8 @@ bio=bio[['goodreads_book_id','authors','isbn','original_title','average_rating',
 romance=romance[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
 adventure=adventure[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
 comics=comics[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
-poetry=comics[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
+poetry=poetry[['goodreads_book_id','authors','isbn','original_title','average_rating','image_url']]
+
 
 
 scifi.sort_values(by='average_rating',ascending=False,inplace=True)
@@ -84,13 +86,11 @@ comics.sort_values(by='average_rating',ascending=False,inplace=True)
 poetry.sort_values(by='average_rating',ascending=False,inplace=True)
 
 
-
 scifi=scifi[:1000]
 horor=horor[:1000]
 bio=bio[:1000]
 romance=romance[:1000]
 adventure=adventure[:1000]
-
 
 print(scifi.count());
 print(horor.count())
@@ -100,7 +100,6 @@ print(romance.count())
 print(adventure.count())
 print(comics.count())
 print(poetry.count())
-
 
 pdList = [scifi,horor,comedy,bio,romance,adventure,comics,poetry]
 new_df = pd.concat(pdList,ignore_index=True)
@@ -116,7 +115,6 @@ comics['genre']='comics'
 adventure['genre']='adventure'
 poetry['genre']='poetry'
 
-
 scifi=scifi[['goodreads_book_id','genre']]
 horor=horor[['goodreads_book_id','genre']]
 comedy=comedy[['goodreads_book_id','genre']]
@@ -124,7 +122,7 @@ bio=bio[['goodreads_book_id','genre']]
 romance=romance[['goodreads_book_id','genre']]
 adventure=adventure[['goodreads_book_id','genre']]
 comics=comics[['goodreads_book_id','genre']]
-poetry=comics[['goodreads_book_id','genre']]
+poetry=poetry[['goodreads_book_id','genre']]
 
 pdList = [scifi,horor,comedy,bio,romance,adventure,comics,poetry]
 new_df = pd.concat(pdList,ignore_index=True)

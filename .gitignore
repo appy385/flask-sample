@@ -3,7 +3,7 @@ __pycache__
 application/__pycache__
 .DS_Store
 load_book.py
-*.csv
+csv
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
