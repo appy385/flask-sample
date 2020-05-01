@@ -1,5 +1,5 @@
-from app import *
-from app.models import Books, BookTags
+from __init__ import *
+from models import Books, BookTags
 from sqlalchemy.sql.expression import func
 
 
