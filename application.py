@@ -1,5 +1,5 @@
-from __init__ import *
-from models import Books, BookTags
+from app import *
+from app.models import Books, BookTags
 from sqlalchemy.sql.expression import func
 
 
@@ -62,5 +62,8 @@ def send_message(message):
     mail.send(msg)
 
 
+
+
 if __name__ == '__main__':
+
     application.run()

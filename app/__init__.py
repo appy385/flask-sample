@@ -5,6 +5,8 @@ from flask_mail import Mail, Message
 application = Flask(__name__)
 application.config.from_object('config')
 db = SQLAlchemy(application)
+
+
 CORS(application)
 mail = Mail()
 mail.init_app(application)
