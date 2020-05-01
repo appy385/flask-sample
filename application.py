@@ -1,23 +1,6 @@
-from flask import Flask, request
-from models import Books, BookTags
-from flask_cors import CORS, cross_origin
-from flask_sqlalchemy import SQLAlchemy
+from app import *
+from app.models import Books, BookTags
 from sqlalchemy.sql.expression import func
-from flask_mail import Mail, Message
-
-application = Flask(__name__)
-application.config.from_object('config')
-db = SQLAlchemy(application)
-CORS(application)
-mail = Mail()
-
-application.config['MAIL_SERVER']='smtp.gmail.com'
-application.config['MAIL_PORT'] = 465
-application.config['MAIL_USERNAME'] = 'contactbookaholics@gmail.com'
-application.config['MAIL_PASSWORD'] = 'bookaholics@123'
-application.config['MAIL_USE_TLS'] = False
-application.config['MAIL_USE_SSL'] = True
-mail.init_app(application)
 
 
 @application.route("/")

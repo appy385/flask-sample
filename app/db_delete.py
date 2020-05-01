@@ -1,5 +1,4 @@
-# from app import db
-from models import BookTags,Books
+from app.models import db
 
-db.drop_all()
+# db.drop_all()
 print("DB deleted.")
