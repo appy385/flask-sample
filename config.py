@@ -9,6 +9,8 @@ SQLALCHEMY_DATABASE_URI= 'mysql+pymysql://root:admin123@book-recommender-db.clyw
 SQLALCHEMY_TRACK_MODIFICATIONS= False
 
 
+
+# Mail Service
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT = 465
 MAIL_USERNAME = 'contactbookaholics@gmail.com'

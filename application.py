@@ -1,8 +1,10 @@
 from app import *
 from app.models import Books, BookTags
+from app.helper import *
+from app.globals import *
 from sqlalchemy.sql.expression import func
-import requests
-import xml.etree.ElementTree as ElementTree
+
+
 
 
 @application.route("/")
@@ -26,24 +28,7 @@ def bookList():
 def genre(genre):
     book_tag = db.session.query(BookTags).filter_by(genre=genre).subquery()
     result = db.session.query(Books,book_tag.c.genre).join(book_tag,Books.goodreads_book_id == book_tag.c.goodreads_book_id).order_by(func.rand()).limit(10).all()
-
-    booksList=[]
-
-    for b in result:
-        book={}
-        book['genre'] =  b.genre
-        book['book_id'] = b[0].book_id
-        book['goodreads_book_id'] = b[0].goodreads_book_id
-        book['authors'] = b[0].authors
-        book['isbn'] = b[0].isbn
-        book['title'] = b[0].title
-        book['average_rating'] = b[0].average_rating
-        book['image_url'] = b[0].image_url
-        booksList.append(book)
-
-    booksDict={ "bookslist": booksList}
-
-    return booksDict
+    return booksDictionary(result)
 
 
 @application.route('/contact',methods = ['POST'])
@@ -54,44 +39,22 @@ def contact():
             "status": {"code": 200}
         }
 
-def send_message(message):
-    print(message['email'])
-    msg = Message(subject="feedback for bookaholics", sender='contactbookaholics@gmail.com', recipients=['contactbookaholics@gmail.com'])
-    msg.body = """
-          From: %s <%s>
-          %s
-          """ % (message['name'], message['email'], message['message'])
-    mail.send(msg)
 
 @application.route('/goodreads_id/<uid>')
 def goodreads(uid):
-    uri = "https://www.goodreads.com/user/show.xml?id="+uid
-    params ={"key": "lwPSaJ53tvJt3tpW13JbxQ"}
-    res = requests.get("https://www.goodreads.com/user/show.xml?id="+uid,params)
-    if res.status_code==200:
-        root = ElementTree.fromstring(res.content)
-        book_list={}
-        for child in root.iter('update'):
-            print(child)
-            r=child.find('action')
-            if r is None:
-                continue
-            goodreads_id = ((((child.find('object')).find('book')).find('id')).text)
-            rating = (r.find('rating').text)
-            book_list[goodreads_id]=rating
-        return book_list
-    elif res.status_code==401:
-        error = { 'status': { 'code': res.status_code }, 'error_message' : 'Unauthorized access.Please Try again!' }
-        return error;
+    uri = goodreads_url+uid
+    response = sendRequest(uri,params)
 
-    else:
-        error = { 'status': { 'code': res.status_code }, 'error_message' : 'Goodreads User ID does not exist' }
+    if response.status_code==200:
+        return parseXML(response)
+
+    elif response.status_code==401:
+        error = { 'status': { 'code': response.status_code }, 'error_message' : 'Unauthorized access.Please Try again!' }
         return error
 
-
-
-
-
+    else:
+        error = { 'status': { 'code': response.status_code }, 'error_message' : 'Goodreads User ID does not exist' }
+        return error
 
 
 
