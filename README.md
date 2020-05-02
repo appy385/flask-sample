@@ -51,9 +51,9 @@ By default DB is not allowed for external access unless you specify.To modify wh
 
 1. Go to **EC2>Security Groups**. Click on **Create a Security Group**
 
-2. You can restrict it to your computer (AWS can detect your IP range), or you can open inbound traffic to everyone. In this configuration we are allowing access to everyone(0.0.0.0).Click **create**
+2. You can restrict it to your computer (AWS can detect your IP range), or you can open inbound traffic to everyone. In this configuration we are allowing access to everyone(0.0.0.0).Click on **create** button.
 
-3. Now go back to your database select the DB instance and click  **Modify**. In the **Network and Security** section change the security group with on you just created. Make sure the **public accessibility** is **Yes**. Click **Apply Immediately** and then **Modify DB Instance**.
+3. Now, go back to your database select the DB instance and click  **Modify**. In the **Network and Security** section change the security group with on you just created. Make sure the **public accessibility** is **Yes**. Click **Apply Immediately** and then **Modify DB Instance**.
 
 ### Create a Database in your DB instance
 
