@@ -30,7 +30,7 @@ def sendRequest(uri,params):
         response = requests.get(uri,params)
         return response
 
-def booksDictionary(result):
+def books(result):
     booksList=[]
     for b in result:
         book={}
