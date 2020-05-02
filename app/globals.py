@@ -1,5 +1,5 @@
 
-goodreads_url='https://www.goodreads.com/user/show.xml?username='
+goodreads_url='https://www.goodreads.com/user/show.xml?id='
 
 params = {
     'key': 'lwPSaJ53tvJt3tpW13JbxQ'
