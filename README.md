@@ -57,7 +57,7 @@ By default DB is not allowed for external access unless you specify.To modify wh
 
 ### Create a Database in your DB instance
 
-> NOTE: If you dont have MySQL installed. Follow this link below till **step 6** to install MySQL and access MySQL server from command line. [https://developer.blackberry.com/develop/platform_services/install_mysql_mac_os_x_environment.html]
+> NOTE: If you dont have MySQL installed. Follow the link below till **step 6** to install MySQL and access it using command line. [https://developer.blackberry.com/develop/platform_services/install_mysql_mac_os_x_environment.html]
 
 
 Command to connect to MYSQL DB instance
