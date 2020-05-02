@@ -1,6 +1,8 @@
 from app import *
 from app.models import Books, BookTags
 from sqlalchemy.sql.expression import func
+import requests
+import xml.etree.ElementTree as ElementTree
 
 
 @application.route("/")
@@ -60,6 +62,35 @@ def send_message(message):
           %s
           """ % (message['name'], message['email'], message['message'])
     mail.send(msg)
+
+@application.route('/goodreads_id/<uid>')
+def goodreads(uid):
+    uri = "https://www.goodreads.com/user/show.xml?id="+uid
+    params ={"key": "lwPSaJ53tvJt3tpW13JbxQ"}
+    res = requests.get("https://www.goodreads.com/user/show.xml?id="+uid,params)
+    if res.status_code==200:
+        root = ElementTree.fromstring(res.content)
+        book_list={}
+        for child in root.iter('update'):
+            print(child)
+            r=child.find('action')
+            if r is None:
+                continue
+            goodreads_id = ((((child.find('object')).find('book')).find('id')).text)
+            rating = (r.find('rating').text)
+            book_list[goodreads_id]=rating
+        return book_list
+    elif res.status_code==401:
+        error = { 'status': { 'code': res.status_code }, 'error_message' : 'Unauthorized access.Please Try again!' }
+        return error;
+
+    else:
+        error = { 'status': { 'code': res.status_code }, 'error_message' : 'Goodreads User ID does not exist' }
+        return error
+
+
+
+
 
 
 
