@@ -73,7 +73,7 @@ $ create database <database-name>
 $ use <database name>
 
  ```
-Edit the `config.py` file to include the master username, password, and <database-name> you entered earlier
+Edit the `config.py` file to include the master username, password, and `<database-name>` you entered earlier
 
 ```
 SQLALCHEMY_DATABASE_URI = ‘mysql+pymysql://<db_user>:<db_password>@<endpoint>/<database-name>’
