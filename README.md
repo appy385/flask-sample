@@ -36,7 +36,53 @@ Now, install dependencies from requirement file ` requirements.txt`
 $ pip install -r requirements.txt
 ```
 
-Your Flask setup is ready.To check your flask application is running successfully. Run your flask application in local environment. Make sure your python virtual environment is activate.
+## Setup Flask Sample app with AWS database
+
+
+### Create a MySQL database using AWS RDS
+
+ On the AWS console, go to RDS. Select the **region** before you click on **Create Database**. Select the defualt **Standard create** method and choose **MySqQL engine**. Choose **free tier** in use case.
+
+ Now setup your DB instance name, master username and password.For the advanced DB settings, leave the defaults as-is and click **Create database**. It takes few minutes for the DB instance status to change to **available**.
+
+### Modify Permissions of DB Instance
+
+By default DB is not allowed for external access unless you specify.To modify who can access your DB :- 
+
+1. Go to **EC2>Security Groups**. Click on **Create a Security Group**
+
+2. You can restrict it to your computer (AWS can detect your IP range), or you can open inbound traffic to everyone. In this configuration we are allowing access to everyone(0.0.0.0).Click on **create** button.
+
+3. Now, go back to your database select the DB instance and click  **Modify**. In the **Network and Security** section change the security group with on you just created. Make sure the **public accessibility** is **Yes**. Click **Apply Immediately** and then **Modify DB Instance**.
+
+### Create a Database in your DB instance
+
+> NOTE: If you dont have MySQL installed. Follow the link below till **step 6** to install MySQL and access it using command line. [https://developer.blackberry.com/develop/platform_services/install_mysql_mac_os_x_environment.html]
+
+
+Command to connect to MYSQL DB instance
+
+```
+mysql -h <endpoint> -P 3306 -u <mymasterusername> -p
+
+```
+This will prompt for password. Enter the password of DB instance and  Create database 
+
+```
+$ create database <database-name>
+$ use <database name>
+
+ ```
+Edit the `config.py` file to include the master username, password, and `<database-name>` you entered earlier
+
+```
+SQLALCHEMY_DATABASE_URI = ‘mysql+pymysql://<db_user>:<db_password>@<endpoint>/<database-name>’
+
+```
+
+### Run Flask Application
+
+Your Flask setup is ready. To check your flask application is running successfully. Run your flask application in local environment. Make sure your python virtual environment is activate.
 ```
 $ python application.py
 -----------OR------------------------
@@ -151,6 +197,7 @@ Open `Route53` from AWS services and create a hosted zone.
 ### Create SSL certificate with AWS Credential Manager
 
 You can get your SSL certificate for free at AWS services. Open `Certificate Manager` from AWS services and select the same region you have chosen for your EB environmemnt.
+
 - Click on **Request a certificate** button and go with the default option **public certificate**.
 - Add your domain name and click **Next**.
 - Choose **DNS validation** to validate that you are the owner of the domain.
@@ -169,13 +216,17 @@ In order to make HTTPS request we need to add this SSL certificate to the load b
 
 - Navigate to the Configuration Tab of your Elastic Beanstalk App. Click on **Edit** button of Load Balancer.
 - Add listener to the load balancer with following details and assign the newly created SSL certificate.
+
 ```
 Listener Port: 443
 Listener Protocol: HTTPS
 Instance Port: 80
 Instance Protocol: HTTP
 ```
+
 **Apply** these changes. Once completeled, navigate to https://yourdomain and you should see your site served through HTTPS.
+
+
 
 
 
