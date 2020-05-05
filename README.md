@@ -234,12 +234,14 @@ References
 2. https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
 3. https://medium.com/analytics-vidhya/tutorial-how-to-deploy-an-angular-app-with-a-free-domain-and-ssl-to-aws-s3-and-cloudfront-d0143de53d2d
 4. https://medium.com/@jameshamann/configuring-your-elastic-beanstalk-app-for-ssl-9065ca091f49
+5. https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-flask.html
+6. https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-container.html
+
 
 References for Flask and WSGI server
-5. https://stackoverflow.com/questions/38982807/are-a-wsgi-server-and-http-server-required-to-serve-a-flask-app
-6. https://djangodeployment.com/2017/01/02/which-wsgi-server-should-i-use/
-7. https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-container.html
-8. https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-flask.html
+1. https://stackoverflow.com/questions/38982807/are-a-wsgi-server-and-http-server-required-to-serve-a-flask-app
+2. https://djangodeployment.com/2017/01/02/which-wsgi-server-should-i-use/
+
 
 
 
