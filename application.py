@@ -46,9 +46,10 @@ def contact():
 def bookTitle():
     path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
-    book_titles = df['original_title'].to_dict()
-    book_titles = json.dumps(book_titles)
-    return book_titles
+    df.dropna(subset=['original_title'],inplace=True)
+    book_titles = df['original_title'].tolist()
+    #book_titles = json.dumps(book_titles)
+    return {"titles":book_titles}
 
 
 
