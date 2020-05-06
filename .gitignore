@@ -1,7 +1,6 @@
 venv
 __pycache__
 .DS_Store
-csv/*.csv
 app/db_load.py
 app/__pycache__
 
