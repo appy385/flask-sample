@@ -2,9 +2,7 @@ import requests
 import xml.etree.ElementTree as ElementTree
 from flask_mail import Message
 
-
-
-def send_message(message):
+def send_message(message,mail):
     print(message['email'])
     msg = Message(subject="feedback for bookaholics", sender='contactbookaholics@gmail.com', recipients=['contactbookaholics@gmail.com'])
     msg.body = """

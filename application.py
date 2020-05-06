@@ -36,7 +36,7 @@ def genre(genre):
 @application.route('/contact',methods = ['POST'])
 def contact():
         print(request);
-        send_message(request.json)
+        send_message(request.json,mail)
         return {
             "status": {"code": 200}
         }
