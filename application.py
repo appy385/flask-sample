@@ -5,6 +5,7 @@ from app.globals import *
 from sqlalchemy.sql.expression import func
 import os
 import pandas as pd
+import json
 
 
 
@@ -45,7 +46,9 @@ def contact():
 def bookTitle():
     path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
-    return df['original_title'].to_dict()
+    book_titles = df['original_title'].to_dict()
+    book_titles = json.dumps(book_titles)
+    return book_titles
 
 
 
