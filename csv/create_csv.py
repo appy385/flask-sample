@@ -104,7 +104,7 @@ print(poetry.count())
 pdList = [scifi,horor,comedy,bio,romance,adventure,comics,poetry]
 new_df = pd.concat(pdList,ignore_index=True)
 new_df.drop_duplicates(subset='goodreads_book_id', keep="first", inplace=True)
-new_df.to_csv('./books.csv')
+new_df.to_csv('./books_subset.csv')
 
 scifi['genre']='scifi'
 horor['genre']='horror'
@@ -127,6 +127,3 @@ poetry=poetry[['goodreads_book_id','genre']]
 pdList = [scifi,horor,comedy,bio,romance,adventure,comics,poetry]
 new_df = pd.concat(pdList,ignore_index=True)
 new_df.to_csv('./genre.csv')
-
-
-

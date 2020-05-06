@@ -3,6 +3,8 @@ from app.models import Books, BookTags
 from app.helper import *
 from app.globals import *
 from sqlalchemy.sql.expression import func
+import os
+import pandas as pd
 
 
 
@@ -39,10 +41,19 @@ def contact():
             "status": {"code": 200}
         }
 
+@application.route("/title")
+def bookTitle():
+    path = os.getcwd()
+    print(path)
+    df = pd.read_csv(path +'/csv/books.csv')
+    return df['original_title'].to_dict() 
 
-@application.route('/goodreads_id/<uid>')
-def goodreads(uid):
-    uri = goodreads_url + uid
+
+
+
+@application.route('/goodreads_id/<username>')
+def goodreads(username):
+    uri = goodreads_url + username
     response = sendRequest(uri,params)
 
     if response.status_code==200:
@@ -55,7 +66,6 @@ def goodreads(uid):
     else:
         error = { 'status': { 'code': response.status_code }, 'error_message' : 'Goodreads User ID does not exist' }
         return error
-
 
 
 if __name__ == '__main__':
