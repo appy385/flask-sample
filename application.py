@@ -41,12 +41,15 @@ def contact():
             "status": {"code": 200}
         }
 
-@application.route("/title")
+@application.route('/title')
 def bookTitle():
-    path = os.getcwd()
-    print(path)
+    path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
-    return df['original_title'].to_dict() 
+    return df['original_title'].to_dict()
+
+
+
+
 
 
 
