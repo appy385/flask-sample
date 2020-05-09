@@ -39,7 +39,7 @@ def books(result):
         book['goodreads_book_id'] = b[0].goodreads_book_id
         book['authors'] = b[0].authors
         book['isbn'] = b[0].isbn
-        book['title'] = b[0].title
+        book['original_title'] = b[0].title
         book['average_rating'] = b[0].average_rating
         book['image_url'] = b[0].image_url
         booksList.append(book)

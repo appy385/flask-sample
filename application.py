@@ -51,8 +51,18 @@ def bookTitle():
     #book_titles = json.dumps(book_titles)
     return {"titles":book_titles}
 
-
-
+@application.route('/popular')
+def popularBooks():
+    path = os.path.abspath(os.path.dirname(__file__))
+    df = pd.read_csv(path +'/csv/books.csv')
+    df.dropna(subset=['original_title'],inplace=True)
+    df['weighted_rating'] = df['average_rating']*df['ratings_count']
+    df.sort_values('weighted_rating',ascending=False,inplace=True)
+    df = df[:24]
+    df=df.sample(frac=0.5)
+    df=df[['goodreads_book_id', 'authors', 'isbn', 'original_title', 'average_rating', 'image_url']]
+    result= df.to_json(orient='records')
+    return result
 
 
 
