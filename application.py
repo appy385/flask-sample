@@ -6,9 +6,13 @@ from sqlalchemy.sql.expression import func
 import os
 import pandas as pd
 import json
+import pickle
 
 
-
+pickle_in = open("cropped_results_pkl","rb")
+model = pickle.load(pickle_in)
+path = os.path.abspath(os.path.dirname(__file__))
+books = pd.read_csv(path +'/csv/books.csv')
 
 @application.route("/")
 def bookList():
@@ -29,17 +33,17 @@ def contact():
             "status": {"code": 200}
         }
 
+
 @application.route('/title')
 def bookTitle():
-    path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
     df.dropna(subset=['title'],inplace=True)
     book_titles = df['title'].tolist()
     return {"titles":book_titles}
 
+
 @application.route('/popular')
 def popularBooks():
-    path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
     df.dropna(subset=['title'],inplace=True)
     df['weighted_rating'] = df['average_rating']*df['ratings_count']
@@ -51,7 +55,13 @@ def popularBooks():
     return result
 
 
-
+@application.route('/recommend/booktitle/<bookname>')
+def corpus_recommendations(bookname):
+  titles = books[['isbn','title','authors','average_rating','image_url','goodreads_book_id','book_id']]
+  indices = pd.Series(books.index, index=books['title'])
+  idx=indices[bookname]
+  recs = model[idx][:10]
+  return titles.iloc[recs].T.to_dict()
 
 
 @application.route('/goodreads_id/<username>')
