@@ -12,20 +12,7 @@ import json
 
 @application.route("/")
 def bookList():
-    return { "status": { "code": 200},
-            "response": {
-                    "bookslist": [ {"name":"Wings of Fire",
-                    "author":"A P J Abdul Kalam, Arun Tiwari"
-                    },
-                    {"name":"Harry Potter and the Half-Blood Prince",
-                    "author":"J K Rowling"
-                    },
-                    {"name":"HEY!! Long Walk to freedom",
-                    "author":"Nelson Mandela"
-                    },
-                    ]
-                }
-            }
+    return "Welcome to book recommendation system"
 
 @application.route("/<genre>")
 def genre(genre):
@@ -46,21 +33,20 @@ def contact():
 def bookTitle():
     path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
-    df.dropna(subset=['original_title'],inplace=True)
-    book_titles = df['original_title'].tolist()
-    #book_titles = json.dumps(book_titles)
+    df.dropna(subset=['title'],inplace=True)
+    book_titles = df['title'].tolist()
     return {"titles":book_titles}
 
 @application.route('/popular')
 def popularBooks():
     path = os.path.abspath(os.path.dirname(__file__))
     df = pd.read_csv(path +'/csv/books.csv')
-    df.dropna(subset=['original_title'],inplace=True)
+    df.dropna(subset=['title'],inplace=True)
     df['weighted_rating'] = df['average_rating']*df['ratings_count']
     df.sort_values('weighted_rating',ascending=False,inplace=True)
     df = df[:24]
     df=df.sample(frac=0.5)
-    df=df[['goodreads_book_id', 'authors', 'isbn', 'original_title', 'average_rating', 'image_url']]
+    df=df[['goodreads_book_id', 'authors', 'isbn', 'title', 'average_rating', 'image_url']]
     result= df.to_json(orient='records')
     return result
 
