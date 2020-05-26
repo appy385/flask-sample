@@ -17,6 +17,9 @@ import json
 
 path = os.path.abspath(os.path.dirname(__file__))
 books = pd.read_csv(path +'/csv/books.csv', index_col=False)
+with open('cropped_results_pkl', 'rb') as f:
+    model = pickle.load(f)
+
 
 
 
@@ -61,13 +64,13 @@ def popularBooks():
     return result
 
 
-# @application.route('/recommend/booktitle/<bookname>')
-# def corpus_recommendations(bookname):
-#   titles = books[['isbn','title','authors','average_rating','image_url','goodreads_book_id','book_id']]
-#   indices = pd.Series(books.index, index=books['title'])
-#   idx=indices[bookname]
-#   recs = model[idx][:10]
-#   return titles.iloc[recs].T.to_dict()
+@application.route('/recommend/booktitle/<bookname>')
+def corpus_recommendations(bookname):
+  titles = books[['isbn','title','authors','average_rating','image_url','goodreads_book_id','book_id']]
+  indices = pd.Series(books.index, index=books['title'])
+  idx=indices[bookname]
+  recs = model[idx][:10]
+  return titles.iloc[recs].T.to_dict()
 
 
 @application.route('/goodreads_id/<username>')
