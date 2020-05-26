@@ -32,7 +32,7 @@ def bookList():
 def genre(genre):
     book_tag = db.session.query(BookTags).filter_by(genre=genre).subquery()
     result = db.session.query(Books,book_tag.c.genre).join(book_tag,Books.goodreads_book_id == book_tag.c.goodreads_book_id).order_by(func.rand()).limit(10).all()
-    return books(result)
+    return getbooks(result)
 
 
 @application.route('/contact',methods = ['POST'])

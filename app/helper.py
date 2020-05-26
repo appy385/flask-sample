@@ -47,7 +47,7 @@ def sendRequest(uri,params):
         response = requests.get(uri,params)
         return response
 
-def books(result):
+def getbooks(result):
     booksList=[]
     for b in result:
         book={}
