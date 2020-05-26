@@ -17,8 +17,9 @@ import json
 
 path = os.path.abspath(os.path.dirname(__file__))
 books = pd.read_csv(path +'/csv/books.csv', index_col=False)
-with open('cropped_results_pkl', 'rb') as f:
-    model = pickle.load(f)
+# with open('cropped_results_pkl', 'rb') as f:
+#     model = pickle.load(f)
+
 
 
 
@@ -64,13 +65,31 @@ def popularBooks():
     return result
 
 
-@application.route('/recommend/booktitle/<bookname>')
-def corpus_recommendations(bookname):
-  titles = books[['isbn','title','authors','average_rating','image_url','goodreads_book_id','book_id']]
-  indices = pd.Series(books.index, index=books['title'])
-  idx=indices[bookname]
-  recs = model[idx][:10]
-  return titles.iloc[recs].T.to_dict()
+# @application.route('/recommend/booktitle/<bookname>')
+# def corpus_recommendations(bookname):
+#   titles = books[['isbn','title','authors','average_rating','image_url','goodreads_book_id','book_id']]
+#   indices = pd.Series(books.index, index=books['title'])
+#   idx=indices[bookname]
+#   recs = model[idx][:10]
+#   return titles.iloc[recs].T.to_dict()
+
+#4 Get book Recommendation on basis of a bookname you enter
+@application.route('/recommend/booktitle/<bookname>', methods=['POST', 'GET'])
+def recommendations_on_book_title(bookname):
+    #Hound of the Baskervilles
+    booktitle = ''
+    if request.method=='POST':
+        booktitle = request.json['inputtitle']
+    else:
+        booktitle = bookname
+    uri = test_goodreads_url + booktitle
+    response = sendRequest(uri,test_params)
+    if response.status_code==200:
+        return parseXML1(response)
+
+    else:
+        error = { 'status': { 'code': response.status_code }, 'error_message' : 'This bookname does not exist in goodreads' }
+        return error
 
 
 @application.route('/goodreads_id/<username>')

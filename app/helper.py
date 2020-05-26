@@ -1,6 +1,7 @@
 import requests
 import xml.etree.ElementTree as ElementTree
 from flask_mail import Message
+import json
 
 def send_message(message,mail):
     print(message['email'])
@@ -25,6 +26,22 @@ def parseXML(res):
 
     return book_list
 
+def parseXML1(response):
+    root = ElementTree.fromstring(response.content)
+    booksList = []
+    for child in root.iter('book'):
+        book = {}
+        book['isbn'] = child.find('isbn').text
+        book['title'] = child.find('title').text
+        book['average_rating'] = child.find('average_rating').text
+        book['image_url'] = child.find('image_url').text
+        book['goodreads_book_id'] = child.find('id').text
+        book['authors'] =''
+        for subchild in child.iter('authors'):
+                 book['authors']  += (((subchild.find('author')).find('name')).text) + ', '
+        booksList.append(book)
+    json_string = json.dumps(booksList)
+    return json_string
 
 def sendRequest(uri,params):
         response = requests.get(uri,params)
